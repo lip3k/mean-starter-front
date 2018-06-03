@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     signIn() {
-        this.userService.login(this.login, this.password).subscribe(res => {
+        this.userService.signIn(this.login, this.password).subscribe(res => {
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 this.goToDashboard();
