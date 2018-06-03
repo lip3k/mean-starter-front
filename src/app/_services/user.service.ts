@@ -9,17 +9,22 @@ export class UserService {
 
     constructor(private http: Http, private router: Router) {}
 
-    login(username: string, password: string) {
+    signIn(username: string, password: string) {
         return this.http.post(`${environment.apiUrl}/api/signin`, {username, password}).pipe(map(res => res.json()));
     }
 
-    signup(username, password, email) {
+    signOut() {
+        localStorage.removeItem('token');
+        this.router.navigate(['out/login']);
+    }
+
+    signUp(username, password, email) {
         return this.http.post(`${environment.apiUrl}/api/signup`, {username, password, email}).pipe(map(res => res.json()));
     }
 
     verifyToken() {
         const token = this.getToken();
-        return this.http.post(`${environment.apiUrl}/api/verify`, {token});
+        return this.http.post(`${environment.apiUrl}/api/verify`, {token}).pipe(map(res => res.json()));
     }
 
     isUserLoggedIn() {
