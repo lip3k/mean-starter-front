@@ -3,28 +3,29 @@ import { map, filter, catchError, mergeMap } from 'rxjs/operators';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import {Router} from '@angular/router';
 import { environment } from '../../environments/environment';
+import {User} from '../_models/user.model';
 
 @Injectable()
 export class UserService {
 
     constructor(private http: Http, private router: Router) {}
 
-    signIn(username: string, password: string) {
-        return this.http.post(`${environment.apiUrl}/api/signin`, {username, password}).pipe(map(res => res.json()));
+    signIn(email: string, password: string) {
+        return this.http.post(`${environment.apiUrl}/api/user/signin`, {email, password}).pipe(map(res => res.json()));
     }
 
     signOut() {
         localStorage.removeItem('token');
-        this.router.navigate(['out/login']);
+        this.router.navigate(['']);
     }
 
-    signUp(username, password, email) {
-        return this.http.post(`${environment.apiUrl}/api/signup`, {username, password, email}).pipe(map(res => res.json()));
+    signUp(user: User) {
+        return this.http.post(`${environment.apiUrl}/api/user/signup`, {user}).pipe(map(res => res.json()));
     }
 
     verifyToken() {
         const token = this.getToken();
-        return this.http.post(`${environment.apiUrl}/api/verify`, {token}).pipe(map(res => res.json()));
+        return this.http.post(`${environment.apiUrl}/api/user/verifyToken`, {token}).pipe(map(res => res.json()));
     }
 
     isUserLoggedIn() {

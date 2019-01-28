@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <ng-container *ngIf="isUserLoggedIn; else externalMenu">
+                <li class="nav-item">
+                    <p class="nav-link" [routerLink]="'dashboard'" routerLinkActive="active">Home</p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" [routerLink]="'create'" routerLinkActive="active">Add</p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" [routerLink]="'learn'" routerLinkActive="active">Browse</p>
+                </li>
+                <li class="nav-item" [routerLink]="'review'" routerLinkActive="active">
+                    <p class="nav-link" routerLinkActive="active">Quiz</p>
+                </li>
+                <li class="nav-item" (click)="signOut()">
+                    <p class="nav-link" routerLinkActive="active">Log out</p>
+                </li>
+            </ng-container>
+            <ng-template #externalMenu>
+                <li class="nav-item" [routerLink]="''">
+                    <p class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</p>
+                </li>
+                <li class="nav-item" [routerLink]="'register'">
+                    <p class="nav-link"><i class="fas fa-user-alt"></i> Register</p>
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+</nav>

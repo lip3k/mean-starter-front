@@ -1,0 +1,13 @@
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title" *ngIf="!flipped">{{ card.title }}</h5>
+        <h5 class="card-title" *ngIf="flipped">{{ card.content }}</h5>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="!flipped" type="button" class="btn btn-block btn-primary" (click)="flipCard()">Flip</button>
+        <div *ngIf="flipped" class="btn-group" style="width: 100%" role="group" aria-label="Basic example">
+            <button type="button" style="width: 100%" class="btn btn-outline-dark" (click)="answerNo()">Fail</button>
+            <button type="button" style="width: 100%" class="btn btn-primary" (click)="answerYes()">Pass</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<form class="creator">
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               id="questionInput"
+               name="questionInput"
+               autocomplete="off"
+               maxlength="128"
+               placeholder="Title"
+               [(ngModel)]="flashcard.title">
+    </div>
+    <div class="form-group content">
+        <textarea style="flex: 1;"
+                  name="answerInput"
+                  id="answerInput"
+                  class="form-control"
+                  placeholder="Content"
+                  [(ngModel)]="flashcard.content"
+                  maxlength="380"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block" (click)="saveFlashcard()">Add new flashcard</button>
+    </div>
+</form>

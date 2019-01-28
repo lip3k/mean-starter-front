@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../_services/user.service';
+import {UserService} from '../../_services/user.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,16 +9,22 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-    login: string = 'lip3k';
+    email: string = 'dawid@optimalmonitoring.com';
     password: string = 'london09';
 
     constructor(private userService: UserService, private router: Router) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.userService.verifyToken().subscribe(res => {
+            if (res.success) {
+                this.goToDashboard();
+            }
+        });
+    }
 
     signIn() {
-        this.userService.signIn(this.login, this.password).subscribe(res => {
+        this.userService.signIn(this.email, this.password).subscribe(res => {
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 this.goToDashboard();
@@ -27,6 +33,6 @@ export class LoginComponent implements OnInit {
     }
 
     goToDashboard() {
-        this.router.navigate(['']);
+        this.router.navigate(['dashboard']);
     }
 }

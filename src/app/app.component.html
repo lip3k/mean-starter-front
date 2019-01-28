@@ -1,21 +1,7 @@
-<ul class="nav justify-content-end">
-    <ng-container *ngIf="isUserLoggedIn(); else externalMenu">
-        <li class="nav-item">
-            <a class="nav-link active" [routerLink]="''">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" [routerLink]="''">Logout</a>
-        </li>
-    </ng-container>
-    <ng-template #externalMenu>
-        <li class="nav-item">
-            <a class="nav-link active" [routerLink]="''">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" [routerLink]="''">Register</a>
-        </li>
-    </ng-template>
-</ul>
-<div class="container">
-    <router-outlet></router-outlet>
+<app-loader *ngIf="apiProcessing"></app-loader>
+<div *ngIf="!apiProcessing" class="app-body">
+    <app-navbar></app-navbar>
+    <div class="container" style="padding-top: 15px;">
+        <router-outlet></router-outlet>
+    </div>
 </div>
